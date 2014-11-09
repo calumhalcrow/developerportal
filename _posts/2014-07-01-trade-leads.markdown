@@ -7,25 +7,26 @@ published: true
 
 #<a href="trade-leads.html">Trade Leads API</a>
 
-The Trade Leads API provides contract opportunities for U.S. businesses selling their products and services overseas. These leads come from a variety of sources and we continue to expand the number of leads available.
+The Trade Leads API provides contract opportunities for U.S. businesses selling their products and services overseas. These leads come from a variety of sources:
 
-We currently provide trade leads, procurement opportunities, and contract notifications from:
+The State Department’s Business Information Database System (BIDS)
+: A portal built to help U.S. businesses learn about significant international commercial opportunities, subject to their [open government license](https://github.com/USStateDept/bids).
 
-- The State Department’s Business Information Database System (BIDS)
-- The United Kingdom
-- Canada
+The United Kingdom
+: The [UK Government](https://www.contractsfinder.businesslink.gov.uk/) provides procurement information for their government opportunities, subject to their [open government license](http://www.nationalarchives.gov.uk/doc/open-government-licence/).
 
-We will soon be including leads from FedBizOpps.  All leads are consolidated into one endpoint.
+Canada
+: The [Canadian Government](https://buyandsell.gc.ca/procurement-data/) provides procurement information for their government opportunities, subject to their [open government license](http://data.gc.ca/eng/open-government-licence-canada).
 
-Developers can use this API to keep businesses aware of the latest leads in particular industries or locations.  They can also enhance the value of the leads by incorporating reports from ITA’s [Market Research Library](http://developer.trade.gov/market-research-library.html) or [Trade News & Articles](http://developer.trade.gov/trade-news-articles.html) APIs.
+Developers can use this API to keep businesses aware of the latest leads in particular industries or locations. They can also enhance the value of the leads by incorporating reports from ITA’s [Market Research Library](http://developer.trade.gov/market-research-library.html) or [Trade News & Articles](http://developer.trade.gov/trade-news-articles.html) APIs.
 
-The output format for this API is JSON.  Resource URL and Search Parameters can be found towards the bottom of this page.
+The output format for this API is JSON.
 
 ##Resource URL
 
 <div><a href="http://api.trade.gov/trade_leads/search"><pre>http://api.trade.gov/trade_leads/search</pre></a></div>
 
-##Search Parameters for all leads
+##Search Parameters
 
 ###keyword
 
@@ -52,7 +53,7 @@ Returns industry that the lead relates to.  Note:  This method allows you to sea
 Returns location of lead based on ISO [alpha-2 country codes](http://www.iso.org/iso/home/standards/country_codes/country_names_and_code_elements.htm).  Note:  This method allows you to search for multiple countries (plural) but will only return one country (singular) per lead.  
 
     http://api.trade.gov/trade_leads/search?countries={country code}
-    
+
 #####Example:
 
 <div><a href="http://api.trade.gov/trade_leads/search?countries=MX,CA,GB"><pre>http://api.trade.gov/trade_leads/search?countries=MX,CA,GB</pre></a></div>
@@ -66,36 +67,44 @@ The size parameter allows you to configure the maximum amount of hits to be retu
 <div><a href="http://api.trade.gov/trade_leads/search?country=BR&size=1&offset=1"><pre>http://api.trade.gov/trade_leads/search?country=BR&size=1&offset=1</pre></a></div>
 
 
-## Return Values for All Leads
+## Return Values
 
+### Generic Return Values
 
-| Field	| Description |
-| ------| -------------|
+Every returned lead will have the following fields:
+
+| Field | Description |
+| ------| ------------|
 | description | Description of the opportunity |
-| industry | Industry category assigned to the opportunity | 
-| procurement_organization | Agency responsible for the contract | 
-| publish_date | Date lead was posted | 
-| specific_location | Location of the opportunity | 
+| industry | Industry category assigned to the opportunity |
+| procurement_organization | Agency responsible for the contract |
+| publish_date | Date lead was posted |
+| specific_location | Location of the opportunity |
 | status | Status of the lead (note this API only shows open leads) |
-| url  | URL that pertain to the bid |
+| url | URL that pertain to the bid |
+| type | Trade lead source|
 
-## Additional Return Values for Canada
+### Additional Return Values for Canadian leads
+
+In addition to the Generic Return Values, Canada leads will have the following fields:
 
 | Field	| Description |
-| ------| -------------|
-| bid_type 	 The criteria for the contract  |
-| competitive_procurement_strategy 	 Bidding criteria for respondents |
-| contract_number 	 Contract Number for the opportunity |
+| ------| ------------|
+| bid_type | The criteria for the contract  |
+| competitive_procurement_strategy | Bidding criteria for respondents |
+| contract_number | Contract Number for the opportunity |
 | country | Canada |
-| end_date	 Closing date for the lead |
+| end_date | Closing date for the lead |
 | implementing_entity | Agency responsible for the implementation |
 | non_competitive_procurement_strategy | States whether it is a competitive procurement |
 | notice_type | Type of contract |
 | procurement_organization | Agency responsible for the contract |
-| trade_agreement | Relevant trade agreement for the contract | 
+| trade_agreement | Relevant trade agreement for the contract |
 | contact | Point of contact |
 
-## Additional Return Values for Great Britain
+### Additional Return Values for United Kingdom leads
+
+In addition to the Generic Return Values, United Kingdom leads will have the following fields:
 
 | Field	| Description |
 | ------| -------------|
@@ -110,7 +119,9 @@ The size parameter allows you to configure the maximum amount of hits to be retu
 | status | Status of the lead (note this API only shows open leads) |
 | title| Title of the opportunity |
 
-## Additional Return Values for State Department
+### Additional Return Values for State Department leads
+
+In addition to the Generic Return Values, State Department leads will have the following fields:
 
 | borrowing_entity | Bank funding the project|
 | comments | comments about the project|
@@ -126,38 +137,4 @@ The size parameter allows you to configure the maximum amount of hits to be retu
 | submitting_officer | Contract officer name|
 | submitting_officer_contact | Contract officer email|
 | tags | Keywords of the opportunity|
-| title | Title of the opportunity (Canadian Leads)	State
-| type | Trade lead source|
-
-###State Department Description
-
-The [State Department's](http://bids.state.gov/) Business Information Database System (BIDS) is a portal built to help U.S. businesses learn about significant international commercial opportunities.:
-
-**Licence - State Department**
-
-State Department leads are subject to their open government license located at:
-
-[https://github.com/USStateDept/bids](https://github.com/USStateDept/bids)
-
-###Canadian leads
-
-The [Canadian Government](https://buyandsell.gc.ca/procurement-data/) provides procurement information for their government opportunities.  Leads provided by the Canadian government have the following data model:
-
-**Licence - Canada**
-
-Canadian leads are subject to Canada's license located at:
-
-[http://data.gc.ca/eng/open-government-licence-canada](http://data.gc.ca/eng/open-government-licence-canada)
-
-###UK Government leads
-
-The [UK Government](https://www.contractsfinder.businesslink.gov.uk/) provides procurement information for their government opportunities. Leads provided by the UK government have the following data model:
-
-**Licence - UK**
-
-UK leads are subject to their open government license located at:
-
-[http://www.nationalarchives.gov.uk/doc/open-government-licence/](http://www.nationalarchives.gov.uk/doc/open-government-licence/)
-
-
-
+| title | Title of the opportunity (Canadian Leads) State
